@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import '../assets/styles/components/CarouselItem.scss';
 
@@ -22,6 +23,14 @@ const CarouselItem = (props) => {
       </div>
     </div>
   );
+};
+
+CarouselItem.propTypes = {
+  cover: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  year: PropTypes.number.isRequired,
+  contentRating: PropTypes.string.isRequired,
+  duration: PropTypes.number.isRequired,
 };
 
 export default CarouselItem;
