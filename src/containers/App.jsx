@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+
 import Header from '../components/Header';
 import Search from '../components/Search';
 import Categories from '../components/Categories';
@@ -6,26 +7,16 @@ import Carousel from '../components/Carousel';
 import CarouselItem from '../components/CarouselItem';
 import Footer from '../components/Footer';
 
+import useFetchVideos from '../hooks/useFetchVideos';
+
 import '../assets/styles/App.scss';
 
+const url = 'http://localhost:3000/movies';
+
 const App = () => {
-  const [videos, setVideos] = useState({ mylist: [], trends: [], originals: [] });
+  const videos = useFetchVideos(url);
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch('http://localhost:3000/movies');
-      const data = await response.json();
-      return setVideos(data);
-    } catch (error) {
-      return console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  return (
+  return videos.length === 0 ? <h1>Loading...</h1> : (
     <div className="App">
       <Header />
       <Search />
