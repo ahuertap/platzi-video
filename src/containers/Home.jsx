@@ -13,7 +13,7 @@ import '../assets/styles/App.scss';
 
 const url = 'http://localhost:3000/movies';
 
-const App = () => {
+const Home = () => {
   const videos = useFetchVideos(url);
 
   return videos.length === 0 ? <h1>Loading...</h1> : (
@@ -57,4 +57,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Home;
