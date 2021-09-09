@@ -18,7 +18,7 @@ const Home = ({ mylist, trends, originals }) => {
         <Categories title="Mi Lista">
           <Carousel>
             {mylist.map((item) => {
-              return <CarouselItem key={item.id} title={item.title} year={item.year} contentRating={item.contentRating} duration={item.duration} cover={item.cover} />;
+              return <CarouselItem key={item.id} id={item.id} title={item.title} year={item.year} contentRating={item.contentRating} duration={item.duration} cover={item.cover} />;
             })}
           </Carousel>
         </Categories>
@@ -28,7 +28,7 @@ const Home = ({ mylist, trends, originals }) => {
         <Categories title="Tendencias">
           <Carousel>
             {trends.map((item) => {
-              return <CarouselItem key={item.id} title={item.title} year={item.year} contentRating={item.contentRating} duration={item.duration} cover={item.cover} />;
+              return <CarouselItem key={item.id} id={item.id} title={item.title} year={item.year} contentRating={item.contentRating} duration={item.duration} cover={item.cover} />;
             })}
           </Carousel>
         </Categories>
@@ -38,7 +38,7 @@ const Home = ({ mylist, trends, originals }) => {
         <Categories title="Originales">
           <Carousel>
             {originals.map((item) => {
-              return <CarouselItem key={item.id} title={item.title} year={item.year} contentRating={item.contentRating} duration={item.duration} cover={item.cover} />;
+              return <CarouselItem key={item.id} id={item.id} title={item.title} year={item.year} contentRating={item.contentRating} duration={item.duration} cover={item.cover} />;
             })}
           </Carousel>
         </Categories>
