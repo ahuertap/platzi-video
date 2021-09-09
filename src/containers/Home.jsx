@@ -1,11 +1,9 @@
 import React from 'react';
 
-import Header from '../components/Header';
 import Search from '../components/Search';
 import Categories from '../components/Categories';
 import Carousel from '../components/Carousel';
 import CarouselItem from '../components/CarouselItem';
-import Footer from '../components/Footer';
 
 import useFetchVideos from '../hooks/useFetchVideos';
 
@@ -17,8 +15,7 @@ const Home = () => {
   const videos = useFetchVideos(url);
 
   return videos.length === 0 ? <h1>Loading...</h1> : (
-    <div className="App">
-      <Header />
+    <>
       <Search />
 
       {videos.mylist.length > 0 && (
@@ -50,10 +47,7 @@ const Home = () => {
           </Carousel>
         </Categories>
       )}
-
-      <Footer />
-
-    </div>
+    </>
   );
 };
 
