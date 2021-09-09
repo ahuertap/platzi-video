@@ -1,47 +1,43 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import Search from '../components/Search';
 import Categories from '../components/Categories';
 import Carousel from '../components/Carousel';
 import CarouselItem from '../components/CarouselItem';
 
-import useFetchVideos from '../hooks/useFetchVideos';
-
 import '../assets/styles/App.scss';
 
-const url = 'http://localhost:3000/movies';
+const Home = ({ mylist, trends, originals }) => {
 
-const Home = () => {
-  const videos = useFetchVideos(url);
-
-  return videos.length === 0 ? <h1>Loading...</h1> : (
+  return (
     <>
       <Search />
 
-      {videos.mylist.length > 0 && (
+      {mylist.length > 0 && (
         <Categories title="Mi Lista">
           <Carousel>
-            {videos.mylist.map((item) => {
+            {mylist.map((item) => {
               return <CarouselItem key={item.id} title={item.title} year={item.year} contentRating={item.contentRating} duration={item.duration} cover={item.cover} />;
             })}
           </Carousel>
         </Categories>
       )}
 
-      {videos.trends.length > 0 && (
+      {trends.length > 0 && (
         <Categories title="Tendencias">
           <Carousel>
-            {videos.trends.map((item) => {
+            {trends.map((item) => {
               return <CarouselItem key={item.id} title={item.title} year={item.year} contentRating={item.contentRating} duration={item.duration} cover={item.cover} />;
             })}
           </Carousel>
         </Categories>
       )}
 
-      {videos.originals.length > 0 && (
+      {originals.length > 0 && (
         <Categories title="Originales">
           <Carousel>
-            {videos.originals.map((item) => {
+            {originals.map((item) => {
               return <CarouselItem key={item.id} title={item.title} year={item.year} contentRating={item.contentRating} duration={item.duration} cover={item.cover} />;
             })}
           </Carousel>
@@ -51,4 +47,12 @@ const Home = () => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state) => {
+  return {
+    mylist: state.mylist,
+    trends: state.trends,
+    originals: state.originals,
+  };
+};
+
+export default connect(mapStateToProps, null)(Home);
