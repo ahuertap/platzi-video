@@ -11,13 +11,19 @@ import plusIcon from '../assets/images/plus-icon.png';
 import removeIcon from '../assets/images/delete-icon.png';
 
 const CarouselItem = (props) => {
-  const { id, title, year, contentRating, duration, cover } = props;
+  const { id, title, year, contentRating, duration, cover, isInMyList } = props;
   const details = `${year} ${contentRating} ${duration} minutes`;
 
   const handleSetFavorite = () => {
-    props.setFavorite({
-      id, title, year, contentRating, duration, cover,
-    });
+    const existsFavorite = props.mylist.find((item) => item.id === id);
+
+    if (existsFavorite) {
+      alert(`Ya tienes agregado ${title} a la lista de favoritos`);
+    } else {
+      props.setFavorite({
+        id, title, year, contentRating, duration, cover,
+      });
+    }
   };
 
   const handleDeleteFavorite = (id) => {
@@ -30,8 +36,9 @@ const CarouselItem = (props) => {
       <div className="carousel-item__details">
         <div>
           <img className="carousel-item__details--img" src={playIcon} alt="Play Icon" />
-          <img className="carousel-item__details--img" src={plusIcon} alt="Plus Icon" onClick={handleSetFavorite} />
-          <img className="carousel-item__details--img" src={removeIcon} alt="Remove Icon" onClick={() => handleDeleteFavorite(id)} />
+          {isInMyList ?
+            <img className="carousel-item__details--img" src={removeIcon} alt="Remove Icon" onClick={() => handleDeleteFavorite(id)} /> :
+            <img className="carousel-item__details--img" src={plusIcon} alt="Plus Icon" onClick={handleSetFavorite} />}
         </div>
         <p className="carousel-item__details--title">{title}</p>
         <p className="carousel-item__details--subtitle">{details}</p>
@@ -48,9 +55,15 @@ CarouselItem.propTypes = {
   duration: PropTypes.number.isRequired,
 };
 
+const mapStateToProps = (state) => {
+  return {
+    mylist: state.mylist,
+  };
+};
+
 const mapDispatchToProps = {
   setFavorite,
   deleteFavorite,
 };
 
-export default connect(null, mapDispatchToProps)(CarouselItem);
+export default connect(mapStateToProps, mapDispatchToProps)(CarouselItem);
