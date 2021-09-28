@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import Header from '../components/Header';
 import Search from '../components/Search';
 import Categories from '../components/Categories';
 import Carousel from '../components/Carousel';
@@ -12,6 +13,7 @@ const Home = ({ mylist, trends, originals }) => {
 
   return (
     <>
+      <Header />
       <Search />
 
       {mylist.length > 0 && (
